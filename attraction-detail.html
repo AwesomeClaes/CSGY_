@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>电子商务专升本四班</title>
+  <style>
+    /* 基础样式 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f7f0;
+      color: #2d3e36;
+      line-height: 1.6;
+    }
+    
+    .container {
+      width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* 导航栏 */
+    header {
+      background-color: #4a6741;
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #ffffff;
+      text-decoration: none;
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+    
+    nav a {
+      color: #e8f1e6;
+      text-decoration: none;
+      font-size: 16px;
+      transition: all 0.3s;
+      padding: 5px 0;
+    }
+    
+    nav a:hover, nav a.active {
+      color: #ffd966;
+      border-bottom: 2px solid #ffd966;
+    }
+    
+    /* 面包屑导航 */
+    .breadcrumbs {
+      padding: 30px 0 15px;
+      font-size: 14px;
+      color: #6b7d74;
+    }
+    
+    .breadcrumbs a {
+      color: #6b7d74;
+      text-decoration: none;
+    }
+    
+    .breadcrumbs a:hover {
+      color: #4a6741;
+      text-decoration: underline;
+    }
+    
+    .breadcrumbs span {
+      margin: 0 8px;
+      color: #9aa9a2;
+    }
+    
+    /* 景点详情区 */
+    .attraction-detail {
+      padding-bottom: 60px;
+    }
+    
+    .detail-header {
+      margin-bottom: 35px;
+    }
+    
+    .detail-title {
+      font-size: 32px;
+      margin-bottom: 15px;
+      color: #2d3e36;
+    }
+    
+    .detail-gallery {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 35px;
+    }
+    
+    .main-image {
+      flex: 3;
+      height: 450px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .main-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .image-thumbs {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .thumb-item {
+      height: calc(33.333% - 10px);
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+    
+    .thumb-item:hover {
+      opacity: 1;
+    }
+    
+    .thumb-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .detail-content {
+      display: flex;
+      gap: 35px;
+    }
+    
+    .content-main {
+      flex: 3;
+    }
+    
+    .content-sidebar {
+      flex: 1;
+    }
+    
+    .content-section {
+      background-color: white;
+      border-radius: 8px;
+      padding: 25px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      margin-bottom: 25px;
+    }
+    
+    .section-heading {
+      font-size: 22px;
+      margin-bottom: 20px;
+      color: #2d3e36;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e8f1e6;
+    }
+    
+    .section-text {
+      margin-bottom: 20px;
+      color: #5a6b62;
+      line-height: 1.7;
+    }
+    
+    .seasonal-info {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .season-card {
+      flex: 1;
+      background-color: #f5f7f0;
+      padding: 15px;
+      border-radius: 6px;
+      text-align: center;
+    }
+    
+    .season-card h4 {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #4a6741;
+    }
+    
+    .season-card p {
+      font-size: 14px;
+      color: #5a6b62;
+    }
+    
+    .info-item {
+      display: flex;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px dashed #e8f1e6;
+    }
+    
+    .info-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    .info-label {
+      flex: 1;
+      font-weight: 500;
+      color: #2d3e36;
+    }
+    
+    .info-value {
+      flex: 2;
+      color: #5a6b62;
+    }
+    
+    .info-value a {
+      color: #70a945;
+      text-decoration: none;
+    }
+    
+    .info-value a:hover {
+      text-decoration: underline;
+    }
+    
+    /* 字体图标 */
+    .icon {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      position: relative;
+      top: 0.15em;
+      margin-right: 8px;
+    }
+    
+    .icon-detail::before {
+      content: "🌿";
+    }
+    
+    .icon-map::before {
+      content: "🗺️";
+    }
+    
+    .icon-tips::before {
+      content: "💡";
+    }
+    /* 页脚样式 */
+footer {
+  background-color: #2d3e36;
+  color: #e8f1e6;
+  padding: 60px 0 30px;
+}
+
+.footer-columns {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-title {
+  font-size: 24px;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.footer-subtitle {
+  font-size: 18px;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.footer-desc {
+  color: #b4c4bc;
+  line-height: 1.7;
+}
+
+.footer-links li {
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: #b4c4bc;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: #ffd966;
+}
+
+.footer-contact li {
+  list-style: none;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.footer-contact .icon {
+  margin-top: 3px;
+  color: #70a945;
+}
+
+.footer-form {
+  display: flex;
+}
+
+.email-input {
+  flex: 1;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px 0 0 4px;
+  font-size: 14px;
+}
+
+.submit-btn {
+  background-color: #70a945;
+  color: white;
+  border: none;
+  padding: 0 20px;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #5a8a3c;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  font-size: 14px;
+  color: #b4c4bc;
+}
+
+.footer-policy a {
+  color: #b4c4bc;
+  text-decoration: none;
+  margin: 0 8px;
+}
+
+.footer-policy a:hover {
+  color: #ffd966;
+}
+
+/* 页脚图标补充 */
+.icon-map-marker::before {
+  content: "📍";
+}
+
+.icon-phone::before {
+  content: "📞";
+}
+
+.icon-email::before {
+  content: "✉️";
+}
+  </style>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <header>
+    <div class="container nav-container">
+      <a href="index.html" class="logo">绿园公园</a>
+      <nav>
+        <ul>
+          <li><a href="index.html">首页</a></li>
+          <li><a href="attractions.html" class="active">景点介绍</a></li>
+          <li><a href="#">设施服务</a></li>
+          <li><a href="#">活动安排</a></li>
+          
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 面包屑导航 -->
+  <div class="container">
+    <div class="breadcrumbs">
+      <a href="index.html">首页</a>
+      <span>›</span>
+      <a href="attractions.html">景点介绍</a>
+      <span>›</span>
+      <span>中央湖区</span>
+    </div>
+  </div>
+
+  <!-- 景点详情区 -->
+  <section class="attraction-detail">
+    <div class="container">
+      <div class="detail-header">
+        <h1 class="detail-title" id="lake"><span class="icon icon-detail"></span> 中央湖区</h1>
+      </div>
+      
+      <div class="detail-gallery">
+        <div class="main-image" id="mainImage">
+          <img src="https://picsum.photos/id/15/800/600" alt="中央湖区全景">
+        </div>
+        <div class="image-thumbs">
+          <div class="thumb-item">
+            <img src="https://picsum.photos/id/15/300/200" alt="湖区风光" data-img="https://picsum.photos/id/15/800/600">
+          </div>
+          <div class="thumb-item">
+            <img src="https://picsum.photos/id/29/300/200" alt="湖中游船" data-img="https://picsum.photos/id/29/800/600">
+          </div>
+          <div class="thumb-item">
+            <img src="https://picsum.photos/id/42/300/200" alt="湖边栈道" data-img="https://picsum.photos/id/42/800/600">
+          </div>
+        </div>
+      </div>
+      
+      <div class="detail-content">
+        <div class="content-main">
+          <div class="content-section">
+            <h2 class="section-heading">景点介绍</h2>
+            <p class="section-text">
+              中央湖区是绿园公园的标志性景观，建于2000年，由人工挖掘而成，总占地面积3公顷，湖水最深处达4米。湖区设计巧妙，模仿自然水系形态，形成蜿蜒曲折的水岸线，与周边绿地植被自然融合。
+            </p>
+            <p class="section-text">
+              湖中有三座小岛，分别命名为"春屿"、"夏洲"和"秋岛"，通过两座造型别致的木桥连接。岛上种植有各类观赏性树木和灌木，为鸟类提供了理想的栖息环境。湖岸线全长约1.2公里，沿途设有多处观景平台、亲水平台和休息座椅。
+            </p>
+            <p class="section-text">
+              湖区水质优良，常年保持在地表水Ⅲ类标准，水中养殖有锦鲤、草鱼等多种观赏鱼类和食用鱼类。湖岸种植有垂柳、水杉、菖蒲等亲水植物，形成了完善的水生态系统。
+            </p>
+          </div>
+          
+          <div class="content-section">
+            <h2 class="section-heading">四季景观</h2>
+            <div class="seasonal-info">
+              <div class="season-card">
+                <h4>春季</h4>
+                <p>垂柳发芽，樱花绽放，湖面野鸭嬉戏</p>
+              </div>
+              <div class="season-card">
+                <h4>夏季</h4>
+                <p>荷花盛开，睡莲点缀，蝉鸣鸟叫</p>
+              </div>
+              <div class="season-card">
+                <h4>秋季</h4>
+                <p>枫红柳黄，桂花飘香，湖面波光粼粼</p>
+              </div>
+              <div class="season-card">
+                <h4>冬季</h4>
+                <p>腊梅绽放，偶有薄冰，候鸟栖息</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="content-sidebar">
+          <div class="content-section">
+            <h2 class="section-heading"><span class="icon icon-map"></span> 基本信息</h2>
+            <div class="info-item">
+              <div class="info-label">位置</div>
+              <div class="info-value">公园中心区域</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">开放时间</div>
+              <div class="info-value">6:00-22:00（全年无休）</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">门票</div>
+              <div class="info-value">免费（游船另收费）</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">游船价格</div>
+              <div class="info-value">脚踏船：30元/小时<br>电动船：50元/小时</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">周边设施</div>
+              <div class="info-value">
+                <a href="#">湖畔咖啡馆</a>、<a href="#">休息亭</a>、<a href="#">公共卫生间</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="content-section">
+            <h2 class="section-heading"><span class="icon icon-tips"></span> 游览提示</h2>
+            <ul style="padding-left: 20px; color: #5a6b62; line-height: 1.7;">
+              <li>游船需缴纳200元押金，归还船只时退还</li>
+              <li>夏季游船最佳时间为上午9点前和下午5点后</li>
+              <li>湖边禁止游泳和垂钓（指定区域除外）</li>
+              <li>节假日游船可能需要排队，建议错峰游览</li>
+              <li>雨天路滑，湖边行走请注意安全</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- 页脚 -->
+<footer class="bg-#2d3e36 text-white py-12">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-columns">
+        <div class="footer-column">
+          <h3 class="footer-title">绿园公园</h3>
+          <p class="footer-desc mt-4">
+            城市中的自然绿洲，为市民提供休闲、娱乐、健身的理想场所，
+            致力于环境保护与生态教育。
+          </p>
+        </div>
+        
+        <div class="footer-column">
+          <h4 class="footer-subtitle">快速链接</h4>
+          <ul class="footer-links mt-4">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="attractions.html">景点介绍</a></li>
+            <li><a href="facilities.html">设施服务</a></li>
+            <li><a href="events.html">活动安排</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4 class="footer-subtitle">联系我们</h4>
+          <ul class="footer-contact mt-4">
+            <li><span class="icon icon-map-marker"></span> 城市中心区绿化路88号</li>
+            <li><span class="icon icon-phone"></span> 012-34567890</li>
+            <li><span class="icon icon-email"></span> info@lvyuanpark.com</li>
+            <li><span class="icon icon-time"></span> 开放时间: 6:00-22:00</li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4 class="footer-subtitle">订阅资讯</h4>
+          <p class="mt-4 mb-3">获取公园活动和季节性景观更新</p>
+          <form class="footer-form">
+            <input type="email" placeholder="您的邮箱地址" class="email-input">
+            <button type="submit" class="submit-btn">订阅</button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="footer-bottom mt-10 pt-6 border-t border-white/20">
+        <div class="footer-copyright">
+          &copy; 2023 绿园公园管理处 版权所有 | 网站标题：电子商务专升本四班
+        </div>
+        <div class="footer-policy">
+          <a href="#">隐私政策</a> | <a href="#">使用条款</a> | <a href="#">网站地图</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+  <script>
+    // 图片切换功能
+    document.querySelectorAll('.thumb-item img').forEach(thumb => {
+      thumb.addEventListener('click', function() {
+        const mainImage = document.getElementById('mainImage').querySelector('img');
+        mainImage.src = this.getAttribute('data-img');
+      });
+    });
+  </script>
+</body>
+</html>
